@@ -11,7 +11,6 @@ Source:		http://www.gazuga.net/files/%{name}-%{version}.tar.bz2
 URL:		http://www.gazuga.net/
 License:	GPL
 Group:		Sound
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig
 BuildRequires:	gtk-devel libsamplerate-devel libxml2-devel
 BuildRequires:	libalsa-devel jackit-devel ladcca-devel
