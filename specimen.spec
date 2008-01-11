@@ -43,9 +43,15 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): command="%{name}" icon="sound_section.png" needs="x11" title="Specimen" longtitle="MIDI software sampler" section="Multimedia/Sound"
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
+cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+[Desktop Entry]
+Type=Application
+Exec=%{name}
+Icon=sound_section
+Name=Specimen
+Comment=MIDI software sampler
+Categories=Audio;
 EOF
 
 %find_lang %name
@@ -64,5 +70,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO
 %{_bindir}/%name
 %{_datadir}/%name
-%{_menudir}/%name
+%{_datadir}/applications/mandriva-%name.desktop
 
