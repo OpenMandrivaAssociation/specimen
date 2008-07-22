@@ -1,6 +1,6 @@
 %define name	specimen
 %define version	0.5.1
-%define release %mkrel 2
+%define release %mkrel 3
 
 Name: 	 	%{name}
 Summary: 	MIDI-controlled sampler
