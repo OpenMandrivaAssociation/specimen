@@ -1,13 +1,16 @@
-%define name	specimen
-%define version	0.5.1
-%define release %mkrel 3
+%define pre	rc3
+%define over	0.5.2
 
 Name: 	 	specimen
 Summary: 	MIDI-controlled sampler
-Version: 	0.5.1
-Release: 	%{mkrel 3}
-Source0:	%{name}-%{version}.tar.bz2
+Version: 	%{over}%{pre}
+Release: 	%{mkrel 1}
+# From Debian, upstream died years ago - AdamW 2008/08
+Source0:	%{name}_%{version}.orig.tar.gz
+# Allow external CFLAGS - AdamW 2008/08
 Patch0:		specimen-0.5.1-cflags.patch
+# From Debian: fix build (libjack calls) and major bug - AdamW 2008/08
+Patch1:		specimen-0.5.2rc3-debian.patch
 License:	GPL+
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-buildroot
@@ -20,6 +23,7 @@ BuildRequires:	jackit-devel
 BuildRequires:	ladcca-devel
 BuildRequires:	phat-devel >= 0.3.1
 BuildRequires:  libsndfile-devel
+BuildRequires:	lash-devel
 
 %description
 A software sampler with:
@@ -35,8 +39,9 @@ A software sampler with:
 - a waveform display
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{over}-%{pre}
 %patch0 -p1 -b .cflags
+%patch1 -p1 -b .debian
 
 %build
 %configure2_5x
