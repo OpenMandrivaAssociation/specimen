@@ -2,19 +2,22 @@
 %define version	0.5.1
 %define release %mkrel 3
 
-Name: 	 	%{name}
+Name: 	 	specimen
 Summary: 	MIDI-controlled sampler
-Version: 	%{version}
-Release: 	%{release}
-
-Source:		http://www.gazuga.net/files/%{name}-%{version}.tar.bz2
-URL:		http://www.gazuga.net/
-License:	GPL
+Version: 	0.5.1
+Release: 	%{mkrel 3}
+Source0:	%{name}-%{version}.tar.bz2
+Patch0:		specimen-0.5.1-cflags.patch
+License:	GPL+
 Group:		Sound
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	pkgconfig
-BuildRequires:	gtk-devel libsamplerate-devel libxml2-devel
-BuildRequires:	libalsa-devel jackit-devel ladcca-devel
+BuildRequires:	gtk2-devel
+BuildRequires:	libsamplerate-devel
+BuildRequires:	libxml2-devel
+BuildRequires:	libalsa-devel
+BuildRequires:	jackit-devel
+BuildRequires:	ladcca-devel
 BuildRequires:	phat-devel >= 0.3.1
 BuildRequires:  libsndfile-devel
 
@@ -33,31 +36,32 @@ A software sampler with:
 
 %prep
 %setup -q
+%patch0 -p1 -b .cflags
 
 %build
 %configure2_5x
 %make
 										
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
-cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+mkdir -p %{buildroot}%{_datadir}/applications/
+cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Type=Application
 Exec=%{name}
 Icon=sound_section
 Name=Specimen
 Comment=MIDI software sampler
-Categories=Audio;
+Categories=GTK;Audio;
 EOF
 
-%find_lang %name
+%find_lang %{name}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post
@@ -72,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog NEWS README TODO
-%{_bindir}/%name
-%{_datadir}/%name
-%{_datadir}/applications/mandriva-%name.desktop
+%{_bindir}/%{name}
+%{_datadir}/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
 
