@@ -4,7 +4,7 @@
 Name: 	 	specimen
 Summary: 	MIDI-controlled sampler
 Version: 	%{over}%{pre}
-Release: 	%{mkrel 1}
+Release: 	%{mkrel 2}
 # From Debian, upstream died years ago - AdamW 2008/08
 Source0:	%{name}_%{version}.orig.tar.gz
 # Allow external CFLAGS - AdamW 2008/08
