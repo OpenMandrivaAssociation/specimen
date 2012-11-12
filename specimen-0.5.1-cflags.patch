@@ -1,0 +1,11 @@
+--- specimen-0.5.1/configure	2005-07-22 19:46:25.000000000 -0700
++++ specimen-0.5.1/configure.new	2008-08-28 22:38:29.000000000 -0700
+@@ -1761,7 +1761,7 @@
+ fi;
+ 
+ if test x$with_debug = xno; then
+-    CFLAGS="-O3"
++    CFLAGS="$CFLAGS"
+ else
+ 
+ cat >>confdefs.h <<\_ACEOF
